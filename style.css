@@ -1,15 +1,22 @@
+body{
+  height: 100vh;
+  overflow: hidden;
+}
+
 .section {
   display: inline-block;
   vertical-align: top;
   border: 1px solid black;
   width: calc(50% - 10px);
-  height: 100vh;
+  height: calc( 100% - 20px );
+  overflow-y: scroll;
+  resize: unset;
 }
 
 #open-all {
   z-index: 999999;
   position: fixed;
-  left: calc(100vw - 200px);
+  left: calc(100vw - 250px);
   bottom: 70px;
 
   font-size: 15px;

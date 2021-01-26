@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "lib": ["DOM","es2020"]
+    },
+    "compileOnSave": true
+}

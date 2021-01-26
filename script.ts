@@ -5,10 +5,22 @@ const SOCIAL_NETWORKS = {
   // Note: Instagram unfortunatelly not works this way
 };
 
-const vcardElement = document.getElementById("vcard");
+const vcardElement = document.getElementById("vcard") as HTMLTextAreaElement;
 const socialElement = document.getElementById("social");
 const openAllElement = document.getElementById("open-all");
 const sumElement = document.getElementById("sum");
+
+
+vcardElement.addEventListener('drop',async (event)=>{
+  event.preventDefault();
+
+  const item = event.dataTransfer.items[0];
+  const file = item.getAsFile();
+  const content = await file.text();
+  vcardElement.value = content;
+  convert();
+
+});
 
 openAllElement.addEventListener("click", () => {
   openAll();
@@ -28,18 +40,18 @@ function convert() {
     for (const [socialNetworkName, socialNetworkUrlTemplate] of Object.entries(
       SOCIAL_NETWORKS
     )) {
-      const aElement = document.createElement("A");
+      const aElement = document.createElement("A") as HTMLAnchorElement;
       aElement.innerText = `${name} on ${socialNetworkName}`;
       const url = (aElement.href = socialNetworkUrlTemplate
         .split("%")
         .join(encodeURIComponent(name)));
 
-      //aElement.href = url;
-      //aElement.target = "_blank";
+      aElement.href = url;
+      aElement.target = "_blank";
       aElement.addEventListener("click", (event) => {
         // Note: this is bacause annoying FB CORS rules on search page
-        event.preventDefault();
-        window.open(url);
+        //event.preventDefault();
+        //window.open(url);
       });
 
       socialElement.appendChild(aElement);
@@ -52,9 +64,7 @@ async function openAll() {
   for (const aElement of Array.from(socialElement.querySelectorAll("a"))) {
     console.log(`Opening "${aElement.href}"`);
     window.open(aElement.href, "_blank");
-
-    await forTime(10);
-
+    await forTime(1);
     // Note: In a browser plugin or with a manifest> chrome.tabs.create({ url: aElement.href });
   }
 }
