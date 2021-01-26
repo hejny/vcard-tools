@@ -59,19 +59,14 @@ async function openAll() {
   }
 }
 
-/*
-interface IContact{
-  name?: string; 
-}
-*/
 
-function parseVcard(vcard: string): string[] {
+function parseVcard(vcard) {
   return Array.from(vcard.matchAll(/^(FN:(?<firstname>.*?))$/gms)).map(
     (match) => match.groups.firstname
   );
 }
 
-function forTime(miliseconds: number): Promise<void> {
+function forTime(miliseconds) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
