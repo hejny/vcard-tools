@@ -1,6 +1,6 @@
 # 📇 VCards tools
 
-Various tools for working with VCards in .vcf *(Virtual Contact File)* format.
+Various tools for working with VCards in .vcf *(Virtual Contact File)* format
 
 
 - [Facebook to VCards](/fb-to-vcf) 

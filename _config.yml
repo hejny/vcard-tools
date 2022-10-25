@@ -1,0 +1,8 @@
+title: 📇 VCards tools
+description: >-
+    Various tools for working with VCards in .vcf format
+# Note: For more configuration options @see https://github.com/githubtraining/github-pages/blob/main/config.yml
+
+remote_theme: no-style-please # Note: For more themes @see https://pages.github.com/themes/ @see http://jekyllthemes.org/
+
+# TODO: Put here all reasonable config options of picked theme
