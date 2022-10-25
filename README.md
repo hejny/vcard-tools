@@ -1,3 +1,3 @@
-# 📇 VCards batch opener
+#2 📇 VCards tools
 
-[Open contacts in batch on social networks!](https://hejny.github.io/vcards-batch-opener/)
+- [VCards batch opener](https://hejny.github.io/vcards-batch-opener/) Open contacts in batch on social networks
