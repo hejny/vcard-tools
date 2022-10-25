@@ -13,7 +13,7 @@ body{
   resize: unset;
 }
 
-#open-all {
+button {
   z-index: 999999;
   position: fixed;
   left: calc(100vw - 250px);
