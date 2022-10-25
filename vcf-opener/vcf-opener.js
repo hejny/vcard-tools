@@ -78,7 +78,7 @@ function convert() {
         for (var _b = 0, _c = Object.entries(SOCIAL_NETWORKS); _b < _c.length; _b++) {
             var _d = _c[_b], socialNetworkName = _d[0], socialNetworkUrlTemplate = _d[1];
             var aElement = document.createElement("A");
-            aElement.innerText = name_1 + " on " + socialNetworkName;
+            aElement.innerText = "".concat(name_1, " on ").concat(socialNetworkName);
             var url = (aElement.href = socialNetworkUrlTemplate
                 .split("%")
                 .join(encodeURIComponent(name_1)));
@@ -92,7 +92,7 @@ function convert() {
             socialElement.appendChild(aElement);
         }
     }
-    sumElement.innerHTML = "&nbsp;" + sum + "&nbsp;";
+    sumElement.innerHTML = "&nbsp;".concat(sum, "&nbsp;");
 }
 function openAll() {
     return __awaiter(this, void 0, void 0, function () {
@@ -105,7 +105,7 @@ function openAll() {
                 case 1:
                     if (!(_i < _a.length)) return [3 /*break*/, 4];
                     aElement = _a[_i];
-                    console.log("Opening \"" + aElement.href + "\"");
+                    console.log("Opening \"".concat(aElement.href, "\""));
                     window.open(aElement.href, "_blank");
                     return [4 /*yield*/, forTime(1)];
                 case 2:
