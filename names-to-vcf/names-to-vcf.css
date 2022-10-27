@@ -1,0 +1,6 @@
+#note{
+    position: fixed;
+    left: 15px;
+    bottom: 15px;
+    width: calc( 50vw - 100px);
+}
