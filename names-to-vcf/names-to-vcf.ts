@@ -47,6 +47,11 @@ function saveStateIntoHistory() {
 }
 
 function restoreStateFromHistory() {
+  if (window.location.hash.length < 2) {
+    // Note: There is no previous state to restore
+    return;
+  }
+
   const items = window.location.hash
     .substring(1)
     .split(",")

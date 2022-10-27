@@ -90,6 +90,10 @@ function saveStateIntoHistory() {
     window.history.replaceState({}, "", "#".concat(__spreadArray(__spreadArray([], names, true), [note], false).map(function (name) { return encodeURIComponent(name); }).join(",")));
 }
 function restoreStateFromHistory() {
+    if (window.location.hash.length < 2) {
+        // Note: There is no previous state to restore
+        return;
+    }
     var items = window.location.hash
         .substring(1)
         .split(",")
