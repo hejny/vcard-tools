@@ -76,6 +76,7 @@ function forImmediate() {
         }, 1);
     });
 }
-// !!! Same async+forImmediate everyhere
-// !!! Same naming convertNamesToVcard everyhere
-// !!! Same HTMLInputElement readonly everyhere
+// TODO: !!! Same async+forImmediate everyhere
+// TODO: !!! Same naming convertNamesToVcard everyhere
+// TODO: !!! Same HTMLInputElement readonly everyhere
+// TODO: !!! Create for all tools menu OR backink to main README
