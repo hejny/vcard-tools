@@ -80,3 +80,4 @@ function forImmediate() {
 // TODO: !!! Same naming convertNamesToVcard everyhere
 // TODO: !!! Same HTMLInputElement readonly everyhere
 // TODO: !!! Create for all tools menu OR backink to main README
+// TODO: !!! Reflect input into URL after the hash part #
