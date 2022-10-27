@@ -34,38 +34,70 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var namesElement = document.getElementById("names");
 var noteElement = document.getElementById("note");
 var vcardElement = document.getElementById("vcard");
-namesElement.addEventListener("keydown", convertNamesToVcard);
-namesElement.addEventListener("change", convertNamesToVcard);
-noteElement.addEventListener("keydown", convertNamesToVcard);
-noteElement.addEventListener("change", convertNamesToVcard);
-convertNamesToVcard();
-function convertNamesToVcard() {
+initialize();
+function initialize() {
+    restoreStateFromHistory();
+    namesElement.addEventListener("keydown", /*not await*/ handleChange);
+    namesElement.addEventListener("change", /*not await*/ handleChange);
+    noteElement.addEventListener("keydown", /*not await*/ handleChange);
+    noteElement.addEventListener("change", /*not await*/ handleChange);
+    convertNamesToVcard();
+}
+function handleChange() {
     return __awaiter(this, void 0, void 0, function () {
-        var note;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, forImmediate()];
                 case 1:
                     _a.sent();
-                    note = noteElement.value.trim() || null;
-                    vcardElement.innerHTML = namesElement.value
-                        .split("\n")
-                        .flatMap(function (name) { return [
-                        "BEGIN:VCARD",
-                        "VERSION:3.0",
-                        "FN:".concat(name),
-                        note ? "NOTE:".concat(note) : null,
-                        "END:VCARD",
-                    ]; })
-                        .filter(function (row) { return row != null; })
-                        .join("\n");
+                    saveStateIntoHistory( /* TODO: Debounce */);
+                    convertNamesToVcard();
                     return [2 /*return*/];
             }
         });
     });
+}
+function convertNamesToVcard() {
+    var note = noteElement.value.trim() || null;
+    vcardElement.innerHTML = namesElement.value
+        .split("\n")
+        .flatMap(function (name) { return [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "FN:".concat(name),
+        note ? "NOTE:".concat(note) : null,
+        "END:VCARD",
+    ]; })
+        .filter(function (row) { return row != null; })
+        .join("\n");
+}
+function saveStateIntoHistory() {
+    var note = noteElement.value.trim();
+    var names = namesElement.value.split("\n");
+    // TODO: Maybe propperly pushState not just replace
+    window.history.replaceState({}, "", "#".concat(__spreadArray(__spreadArray([], names, true), [note], false).map(function (name) { return encodeURIComponent(name); }).join(",")));
+}
+function restoreStateFromHistory() {
+    var items = window.location.hash
+        .substring(1)
+        .split(",")
+        .map(function (item) { return decodeURIComponent(item); });
+    var note = items.pop();
+    var names = items;
+    noteElement.value = note;
+    namesElement.value = names.join("\n");
 }
 function forImmediate() {
     // Note: Not using setImmediate because it is non-standard feature only in browser window
@@ -80,4 +112,5 @@ function forImmediate() {
 // TODO: !!! Same naming convertNamesToVcard everyhere
 // TODO: !!! Same HTMLInputElement readonly everyhere
 // TODO: !!! Create for all tools menu OR backink to main README
-// TODO: !!! Save input into URL after the hash part #
+// TODO: !!! Same structure of control everyhere
+// TODO: !!! Save input into URL after the hash part # everyhere
