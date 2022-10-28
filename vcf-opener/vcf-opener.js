@@ -1,3 +1,13 @@
+/*
+
+!!! Remove
+const SOCIAL_NETWORKS = {
+  Facebook: `https://www.facebook.com/search/people/?q=%`,
+  LinkedIn: `https://www.linkedin.com/search/results/people/?keywords=%`,
+  Twitter: `https://twitter.com/search?src=typed_query&f=user&q=%`,
+  // Note: Instagram unfortunatelly not works this way
+};
+*/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,17 +45,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-var SOCIAL_NETWORKS = {
-    Facebook: "https://www.facebook.com/search/people/?q=%",
-    LinkedIn: "https://www.linkedin.com/search/results/people/?keywords=%",
-    Twitter: "https://twitter.com/search?src=typed_query&f=user&q=%"
-    // Note: Instagram unfortunatelly not works this way
-};
 var vcardElement = document.getElementById("vcard");
 var socialElement = document.getElementById("social");
 var openAllElement = document.getElementById("open-all");
 var sumElement = document.getElementById("sum");
-vcardElement.addEventListener('drop', function (event) { return __awaiter(_this, void 0, void 0, function () {
+vcardElement.addEventListener("drop", function (event) { return __awaiter(_this, void 0, void 0, function () {
     var item, file, content;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -67,20 +71,29 @@ openAllElement.addEventListener("click", function () {
 });
 vcardElement.addEventListener("keydown", convert);
 vcardElement.addEventListener("change", convert);
+// !!! Listen to changes for searchNetworks
 convert();
 function convert() {
     var source = vcardElement.value;
+    var searchNetworks = Array.from(document.querySelectorAll("input.search"))
+        .filter(function (element) { return element.checked; })
+        .map(function (element) { return ({
+        title: element.getAttribute("data-search-title"),
+        template: element.getAttribute("data-search-template")
+    }); });
     socialElement.innerHTML = "";
-    var sum = 0;
+    var profilesCount = 0;
+    var linksCount = 0;
     for (var _i = 0, _a = parseVcard(source); _i < _a.length; _i++) {
         var name_1 = _a[_i];
-        sum++;
-        for (var _b = 0, _c = Object.entries(SOCIAL_NETWORKS); _b < _c.length; _b++) {
-            var _d = _c[_b], socialNetworkName = _d[0], socialNetworkUrlTemplate = _d[1];
-            var aElement = document.createElement("A");
-            aElement.innerText = "".concat(name_1, " on ").concat(socialNetworkName);
-            var url = (aElement.href = socialNetworkUrlTemplate
-                .split("%")
+        profilesCount++;
+        for (var _b = 0, searchNetworks_1 = searchNetworks; _b < searchNetworks_1.length; _b++) {
+            var _c = searchNetworks_1[_b], title = _c.title, template = _c.template;
+            linksCount++;
+            var aElement = document.createElement("a");
+            aElement.innerText = "".concat(name_1, " on ").concat(title);
+            var url = (aElement.href = template
+                .split("{{FULLNAME}}")
                 .join(encodeURIComponent(name_1)));
             aElement.href = url;
             aElement.target = "_blank";
@@ -92,7 +105,7 @@ function convert() {
             socialElement.appendChild(aElement);
         }
     }
-    sumElement.innerHTML = "&nbsp;".concat(sum, "&nbsp;");
+    sumElement.innerHTML = "&nbsp;".concat(profilesCount, "&nbsp;profiles&nbsp;(in ").concat(linksCount, " tabs)&nbsp;");
 }
 function openAll() {
     return __awaiter(this, void 0, void 0, function () {

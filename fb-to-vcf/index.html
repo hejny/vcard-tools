@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>📇 Facebook friend list to VCards</title>
 
-   <!-- TODO: Add integrity -->
-    <script src=" https://cdnjs.cloudflare.com/ajax/libs/utf8/3.0.0/utf8.min.js" defer async></script>
+    <!-- TODO: Add integrity -->
+    <script
+      src=" https://cdnjs.cloudflare.com/ajax/libs/utf8/3.0.0/utf8.min.js"
+      defer
+      async
+    ></script>
     <script src="fb-to-vcf.js" defer async></script>
-    <link rel="stylesheet" href="../common/style.css"/>
-    <link rel="stylesheet" href="fb-to-vcf.css"/>
+    <link rel="stylesheet" href="../common/style.css" />
+    <link rel="stylesheet" href="fb-to-vcf.css" />
   </head>
   <body>
-
-  
-
-<textarea id="fb-friends" class="section"  placeholder="{ FB friendlist JSON... }">
+    <textarea
+      id="fb-friends"
+      class="section"
+      placeholder="{ FB friendlist JSON... }"
+    >
   {
   "friends": [
     {
@@ -23,9 +28,11 @@
     }
     ]
   }
-</textarea>
-<textarea class="section"  id="vcard" readonly></textarea>
-<button id="download" >Download .vcf</button>
-    
+</textarea
+    >
+    <textarea class="section" id="vcard" readonly></textarea>
+    <button id="download">Download .vcf</button>
+
+    <!-- TODO: !!! Manual where to get this list -->
   </body>
 </html>

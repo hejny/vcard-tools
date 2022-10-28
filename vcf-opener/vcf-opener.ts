@@ -1,17 +1,20 @@
+/* 
+
+!!! Remove
 const SOCIAL_NETWORKS = {
   Facebook: `https://www.facebook.com/search/people/?q=%`,
   LinkedIn: `https://www.linkedin.com/search/results/people/?keywords=%`,
-  Twitter: `https://twitter.com/search?src=typed_query&f=user&q=%`
+  Twitter: `https://twitter.com/search?src=typed_query&f=user&q=%`,
   // Note: Instagram unfortunatelly not works this way
 };
+*/
 
 const vcardElement = document.getElementById("vcard") as HTMLTextAreaElement;
 const socialElement = document.getElementById("social");
 const openAllElement = document.getElementById("open-all");
 const sumElement = document.getElementById("sum");
 
-
-vcardElement.addEventListener('drop',async (event)=>{
+vcardElement.addEventListener("drop", async (event) => {
   event.preventDefault();
 
   const item = event.dataTransfer.items[0];
@@ -19,7 +22,6 @@ vcardElement.addEventListener('drop',async (event)=>{
   const content = await file.text();
   vcardElement.value = content;
   convert();
-
 });
 
 openAllElement.addEventListener("click", () => {
@@ -27,23 +29,36 @@ openAllElement.addEventListener("click", () => {
 });
 vcardElement.addEventListener("keydown", convert);
 vcardElement.addEventListener("change", convert);
+// !!! Listen to changes for searchNetworks
+
 convert();
 
 function convert() {
   const source = vcardElement.value;
 
+  const searchNetworks = Array.from(
+    document.querySelectorAll("input.search")
+  )
+    .filter((element: HTMLInputElement) => element.checked)
+    .map((element: HTMLInputElement) => ({
+      title: element.getAttribute("data-search-title"),
+      template: element.getAttribute("data-search-template"),
+    }));
+
+
+
   socialElement.innerHTML = "";
 
-  let sum = 0;
+  let profilesCount = 0;
+  let linksCount = 0;
   for (const name of parseVcard(source)) {
-    sum++;
-    for (const [socialNetworkName, socialNetworkUrlTemplate] of Object.entries(
-      SOCIAL_NETWORKS
-    )) {
-      const aElement = document.createElement("A") as HTMLAnchorElement;
-      aElement.innerText = `${name} on ${socialNetworkName}`;
-      const url = (aElement.href = socialNetworkUrlTemplate
-        .split("%")
+    profilesCount++;
+    for (const {title,template} of searchNetworks) {
+      linksCount++;
+      const aElement = document.createElement("a") as HTMLAnchorElement;
+      aElement.innerText = `${name} on ${title}`;
+      const url = (aElement.href = template
+        .split("{{FULLNAME}}")
         .join(encodeURIComponent(name)));
 
       aElement.href = url;
@@ -57,7 +72,7 @@ function convert() {
       socialElement.appendChild(aElement);
     }
   }
-  sumElement.innerHTML = `&nbsp;${sum}&nbsp;`;
+  sumElement.innerHTML = `&nbsp;${profilesCount}&nbsp;profiles&nbsp;(in ${linksCount} tabs)&nbsp;`;
 }
 
 async function openAll() {

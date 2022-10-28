@@ -14,11 +14,6 @@ body{
 }
 
 button {
-  z-index: 999999;
-  position: fixed;
-  left: calc(100vw - 250px);
-  bottom: 70px;
-
   font-size: 15px;
   height: 36px;
   min-width: 80px;

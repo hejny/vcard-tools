@@ -1,0 +1,18 @@
+#open-all{
+    z-index: 999999;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
+#controls{
+    z-index: 999999;
+    position: fixed;
+    left: calc(50vw + 10px);
+    bottom: 20px;
+    user-select: none;
+}
+
+#controls label{
+    display: block;
+}

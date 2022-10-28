@@ -1,27 +1,79 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>📇 VCards batch opener</title>
     <script src="vcf-opener.js" defer async></script>
-    <link rel="stylesheet" href="../common/style.css"/>
-    <link rel="stylesheet" href="vcf-opener.css"/>
+    <link rel="stylesheet" href="../common/style.css" />
+    <link rel="stylesheet" href="vcf-opener.css" />
   </head>
   <body>
-
-    
-<textarea id="vcard" class="section" placeholder="BEGIN:VCARD">
+    <textarea id="vcard" class="section" placeholder="BEGIN:VCARD">
 BEGIN:VCARD
 VERSION:3.0
 FN:Pavol Hejný
 NOTE:📇Put here yout VCARD OR drag it here!📇
 END:VCARD
-</textarea>
-<div id="social" class="section"></div>
-<button id="open-all">Open all <span id="sum"></span> in batch</button>
+</textarea
+    >
+    <div id="social" class="section"></div>
 
+    <div id="controls">
+      <label>
+        <input
+          type="checkbox"
+          class="search"
+          data-search-title="Google"
+          data-search-template="https://www.google.com/search?q={{FULLNAME}}"
+          checked
+        />
+        Search on Google
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          class="search"
+          data-search-title="Facebook"
+          data-search-template="https://www.facebook.com/search/people/?q={{FULLNAME}}"
+          checked
+        />
+        Search on Facebook
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          class="search"
+          data-search-title="LinkedIn"
+          data-search-template="https://www.linkedin.com/search/results/people/?keywords={{FULLNAME}}"
+          checked
+        />
+        Search on LinkedIn
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          class="search"
+          data-search-title="Twitter"
+          data-search-template="https://twitter.com/search?src=typed_query&f=user&q={{FULLNAME}}"
+          checked
+        />
+        Search on Twitter
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          class="search"
+          data-search-title="Instagram"
+          data-search-template="https://www.google.com/search?q={{FULLNAME}}+site%3Ainstagram.com"
+          checked
+        />
+        Search Instagram profile with Google
+      </label>
+    </div>
+    <button id="open-all">Open all <span id="sum"></span> in batch</button>
 
     <!-- TODO: !!! Instagram -->
-    
+    <!-- TODO: !!! Google -->
+    <!-- TODO: !!! Allow to pick searches -->
   </body>
 </html>
