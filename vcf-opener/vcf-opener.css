@@ -8,8 +8,12 @@
 #controls{
     z-index: 999999;
     position: fixed;
-    left: calc(50vw + 10px);
-    bottom: 20px;
+    left: calc(50vw + 5px);
+    bottom: 15px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: rgb(0 0 0 / 20%) 0 0 5px 5px;
     user-select: none;
 }
 

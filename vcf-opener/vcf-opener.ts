@@ -45,7 +45,7 @@ function convert() {
     profilesCount++;
     for (const { title, template } of searchNetworks) {
       linksCount++;
-      const aElement = document.createElement("a") as HTMLAnchorElement;
+      const aElement = document.createElement("a");
       aElement.innerText = `${name} on ${title}`;
       const url = (aElement.href = template
         .split("{{FULLNAME}}")
@@ -62,6 +62,11 @@ function convert() {
       socialElement.appendChild(aElement);
     }
   }
+
+  const bottomSpace = document.createElement("div");
+  bottomSpace.innerHTML = `<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>`;
+  socialElement.appendChild(bottomSpace);
+
   sumElement.innerHTML = `&nbsp;${profilesCount}&nbsp;profiles&nbsp;(in ${linksCount} tabs)&nbsp;`;
 }
 

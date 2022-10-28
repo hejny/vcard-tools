@@ -99,6 +99,9 @@ function convert() {
             socialElement.appendChild(aElement);
         }
     }
+    var bottomSpace = document.createElement("div");
+    bottomSpace.innerHTML = "<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
+    socialElement.appendChild(bottomSpace);
     sumElement.innerHTML = "&nbsp;".concat(profilesCount, "&nbsp;profiles&nbsp;(in ").concat(linksCount, " tabs)&nbsp;");
 }
 function openAll() {
