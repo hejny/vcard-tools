@@ -56,7 +56,7 @@ ${
   vcardElement.value = vCard;
 }
 
-function downloadVcard(filename, contacts) {
+function downloadVcard(filename:string, contacts:string) {
   var element = document.createElement("a");
   element.setAttribute(
     "href",

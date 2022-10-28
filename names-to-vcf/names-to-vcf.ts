@@ -1,6 +1,7 @@
 const namesElement = document.getElementById("names") as HTMLTextAreaElement;
 const noteElement = document.getElementById("note") as HTMLInputElement;
 const vcardElement = document.getElementById("vcard") as HTMLInputElement;
+const downloadElement = document.getElementById("download") as HTMLButtonElement;
 
 initialize();
 
@@ -11,6 +12,11 @@ function initialize() {
   noteElement.addEventListener("keydown", /*not await*/ handleChange);
   noteElement.addEventListener("change", /*not await*/ handleChange);
   convertNamesToVcard();
+
+  downloadElement.addEventListener("click", () => {
+    downloadVcard(noteElement.value.trim()||"contacts", vcardElement.value);
+  });
+
 }
 
 async function handleChange() {
@@ -63,6 +69,22 @@ function restoreStateFromHistory() {
   noteElement.value = note;
   namesElement.value = names.join("\n");
 }
+
+function downloadVcard(filename:string, contacts:string) {
+  var element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:text/vcard;charset=utf-8," + encodeURIComponent(contacts)
+  );
+  element.setAttribute("download", filename + ".vcf");
+
+  element.style.display = "none";
+  document.body.appendChild(element);
+
+  element.click();
+  document.body.removeChild(element);
+}
+
 
 function forImmediate(): Promise<void> {
   // Note: Not using setImmediate because it is non-standard feature only in browser window

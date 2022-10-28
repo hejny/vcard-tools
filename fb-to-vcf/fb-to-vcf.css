@@ -1,6 +1,6 @@
 #download{
     z-index: 999999;
     position: fixed;
-    left: calc(100vw - 200px);
-    bottom: 70px;
+    right: 37px;
+    bottom: 15px;
 }

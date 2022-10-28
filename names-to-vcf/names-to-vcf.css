@@ -4,3 +4,10 @@
     bottom: 15px;
     width: calc( 50vw - 100px);
 }
+
+#download{
+    z-index: 999999;
+    position: fixed;
+    right: 37px;
+    bottom: 15px;
+}

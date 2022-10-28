@@ -46,6 +46,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 var namesElement = document.getElementById("names");
 var noteElement = document.getElementById("note");
 var vcardElement = document.getElementById("vcard");
+var downloadElement = document.getElementById("download");
 initialize();
 function initialize() {
     restoreStateFromHistory();
@@ -54,6 +55,9 @@ function initialize() {
     noteElement.addEventListener("keydown", /*not await*/ handleChange);
     noteElement.addEventListener("change", /*not await*/ handleChange);
     convertNamesToVcard();
+    downloadElement.addEventListener("click", function () {
+        downloadVcard(noteElement.value.trim() || "contacts", vcardElement.value);
+    });
 }
 function handleChange() {
     return __awaiter(this, void 0, void 0, function () {
@@ -102,6 +106,15 @@ function restoreStateFromHistory() {
     var names = items;
     noteElement.value = note;
     namesElement.value = names.join("\n");
+}
+function downloadVcard(filename, contacts) {
+    var element = document.createElement("a");
+    element.setAttribute("href", "data:text/vcard;charset=utf-8," + encodeURIComponent(contacts));
+    element.setAttribute("download", filename + ".vcf");
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
 }
 function forImmediate() {
     // Note: Not using setImmediate because it is non-standard feature only in browser window
