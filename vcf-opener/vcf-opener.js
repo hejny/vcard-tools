@@ -1,13 +1,3 @@
-/*
-
-!!! Remove
-const SOCIAL_NETWORKS = {
-  Facebook: `https://www.facebook.com/search/people/?q=%`,
-  LinkedIn: `https://www.linkedin.com/search/results/people/?keywords=%`,
-  Twitter: `https://twitter.com/search?src=typed_query&f=user&q=%`,
-  // Note: Instagram unfortunatelly not works this way
-};
-*/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -71,7 +61,11 @@ openAllElement.addEventListener("click", function () {
 });
 vcardElement.addEventListener("keydown", convert);
 vcardElement.addEventListener("change", convert);
-// !!! Listen to changes for searchNetworks
+for (var _i = 0, _a = Array.from(document.querySelectorAll("input.search")); _i < _a.length; _i++) {
+    var searchElement = _a[_i];
+    searchElement.addEventListener("click", convert);
+    searchElement.addEventListener("change", convert);
+}
 convert();
 function convert() {
     var source = vcardElement.value;

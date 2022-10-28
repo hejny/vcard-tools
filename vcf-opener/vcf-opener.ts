@@ -1,14 +1,3 @@
-/* 
-
-!!! Remove
-const SOCIAL_NETWORKS = {
-  Facebook: `https://www.facebook.com/search/people/?q=%`,
-  LinkedIn: `https://www.linkedin.com/search/results/people/?keywords=%`,
-  Twitter: `https://twitter.com/search?src=typed_query&f=user&q=%`,
-  // Note: Instagram unfortunatelly not works this way
-};
-*/
-
 const vcardElement = document.getElementById("vcard") as HTMLTextAreaElement;
 const socialElement = document.getElementById("social");
 const openAllElement = document.getElementById("open-all");
@@ -29,23 +18,24 @@ openAllElement.addEventListener("click", () => {
 });
 vcardElement.addEventListener("keydown", convert);
 vcardElement.addEventListener("change", convert);
-// !!! Listen to changes for searchNetworks
+for (const searchElement of Array.from(
+  document.querySelectorAll("input.search")
+)) {
+  searchElement.addEventListener("click", convert);
+  searchElement.addEventListener("change", convert);
+}
 
 convert();
 
 function convert() {
   const source = vcardElement.value;
 
-  const searchNetworks = Array.from(
-    document.querySelectorAll("input.search")
-  )
+  const searchNetworks = Array.from(document.querySelectorAll("input.search"))
     .filter((element: HTMLInputElement) => element.checked)
     .map((element: HTMLInputElement) => ({
       title: element.getAttribute("data-search-title"),
       template: element.getAttribute("data-search-template"),
     }));
-
-
 
   socialElement.innerHTML = "";
 
@@ -53,7 +43,7 @@ function convert() {
   let linksCount = 0;
   for (const name of parseVcard(source)) {
     profilesCount++;
-    for (const {title,template} of searchNetworks) {
+    for (const { title, template } of searchNetworks) {
       linksCount++;
       const aElement = document.createElement("a") as HTMLAnchorElement;
       aElement.innerText = `${name} on ${title}`;
